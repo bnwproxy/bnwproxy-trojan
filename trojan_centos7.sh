@@ -78,15 +78,14 @@ if [ $real_addr == $local_addr ] ; then
 	tar xf trojan-1.*
 	# download trojan client
 	wget https://github.com/bnwproxy/bnwproxy-trojan/raw/master/dist/trojan-client.zip
-	unzip trojan-cli.zip
-	cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-cli/linux/fullchain.cer
-    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-cli/mac/fullchain.cer
-    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-cli/windows/fullchain.cer
+	unzip trojan-client.zip
+	cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/linux/fullchain.cer
+    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/mac/fullchain.cer
+    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/windows/fullchain.cer
     if [[ ! -v trojan_passwd ]]; then
         trojan_passwd=$(cat /dev/urandom | head -1 | md5sum | head -c 8)
     fi
-    echo "server password is" $trojan_passwd
-	cat > /usr/src/trojan-cli/config.json <<-EOF
+	cat > /usr/src/trojan-client/config.json <<-EOF
 {
     "run_type": "client",
     "local_addr": "127.0.0.1",
@@ -119,10 +118,10 @@ if [ $real_addr == $local_addr ] ; then
     }
 }
 EOF
-    cp /usr/src/trojan-cli/config.json /usr/src/trojan-cli/linux/config.json
-    cp /usr/src/trojan-cli/config.json /usr/src/trojan-cli/mac/config.json
-    cp /usr/src/trojan-cli/config.json /usr/src/trojan-cli/windows/config.json
-    rm -rf /usr/src/trojan-cli/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/linux/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/mac/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/windows/config.json
+    rm -rf /usr/src/trojan-client/config.json
 	rm -rf /usr/src/trojan/server.conf
 	cat > /usr/src/trojan/server.conf <<-EOF
 {
@@ -167,11 +166,11 @@ EOF
     }
 }
 EOF
-	cd /usr/src/trojan-cli/
-	zip -q -r trojan-cli.zip /usr/src/trojan-cli/
+	cd /usr/src/trojan-client/
+	zip -q -r trojan-client.zip /usr/src/trojan-client/
 	trojan_path=$(cat /dev/urandom | head -1 | md5sum | head -c 16)
 	mkdir /usr/share/nginx/html/${trojan_path}
-	mv /usr/src/trojan-cli/trojan-cli.zip /usr/share/nginx/html/${trojan_path}/
+	mv /usr/src/trojan-client/trojan-client.zip /usr/share/nginx/html/${trojan_path}/
 	# add script to enable services
 	
 	cat > /usr/lib/systemd/system/trojan.service <<-EOF
@@ -199,7 +198,7 @@ EOF
 	green "======================================================================"
 	green "Torjan has been successfully installed. Please use the link below to download the *fully configured* trojan client"
 	green "1、Copy the link below and open it in a browser and download the client"
-	blue "http://${your_domain}/$trojan_path/trojan-cli.zip"
+	blue "http://${your_domain}/$trojan_path/trojan-client.zip"
 	green "2、将下载的压缩包解压，打开文件夹，打开start.bat即打开并运行Trojan客户端"
 	green "3、打开stop.bat即关闭Trojan客户端"
 	green "4、Trojan客户端需要搭配浏览器插件使用，例如switchyomega等"
