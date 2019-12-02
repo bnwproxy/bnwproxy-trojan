@@ -167,7 +167,7 @@ EOF
 }
 EOF
 	cd /usr/src/trojan-client/
-	zip -q -r trojan-client.zip /usr/src/trojan-client/
+	zip -q -r trojan-client.zip .
 	trojan_path=$(cat /dev/urandom | head -1 | md5sum | head -c 16)
 	mkdir /usr/share/nginx/html/${trojan_path}
 	mv /usr/src/trojan-client/trojan-client.zip /usr/share/nginx/html/${trojan_path}/

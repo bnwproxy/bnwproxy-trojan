@@ -1,6 +1,6 @@
 # Brave New World Proxy (Trojan)
 
-
+![demo.gif](demo.gif)
 
 ## Usage
 
