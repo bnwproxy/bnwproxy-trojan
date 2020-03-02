@@ -204,7 +204,7 @@ EOF
     green "3. Select either using the gui or cli for connection"
     green "4. If gui is selected, open Connection -> Add -> "
     green "   Paste trojan://$trojan_passwd@${your_domain}:443#gfw-trojan ->"
-    green "   **IMPORTANT** disable `Verify certificate` and `Verify Hostname`"
+    green "   **IMPORTANT** disable 'Verify certificate' and 'Verify Hostname'"
     green "   Click ok and then you are good to connect."
     green "   Notice you can click on the icons of system tray to select "
     green "   Global Mode, PAC Mode, or Global Mode"
