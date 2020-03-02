@@ -171,6 +171,11 @@ EOF
 	trojan_path=$(cat /dev/urandom | head -1 | md5sum | head -c 16)
 	mkdir /usr/share/nginx/html/${trojan_path}
 	mv /usr/src/trojan-client/trojan-client.zip /usr/share/nginx/html/${trojan_path}/
+
+    # generate QR Code
+    yum install -y qrencode
+    qrencode -o qrcode.png trojan://$trojan_passwd@${your_domain}:443#gfw-trojan
+    mv qrcode.png /usr/share/nginx/html/${trojan_path}/
 	# add script to enable services
 	
 	cat > /usr/lib/systemd/system/trojan.service <<-EOF
@@ -195,8 +200,10 @@ EOF
 	systemctl enable trojan.service
 	green "======================================================================"
 	green "Torjan has been successfully installed."
-    green "Server config is located at /usr/src/trojan/server.conf"
-    green "The client password is $trojan_passwd if you want to use mobile clients (IOS or Android)"
+    green "The client password is"
+    blue  "$trojan_passwd"
+    green "Scan the QR Code at"
+    blue  "http://${your_domain}/$trojan_path/qrcode.png"
     green "Please use the link below to download the trojan client for desktops (windows, linux, mac)"
 	green "1、Copy the link below and open it in a browser and download the client"
 	blue "http://${your_domain}/$trojan_path/trojan-client.zip"
