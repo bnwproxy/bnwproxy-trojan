@@ -193,15 +193,21 @@ EOF
 	chmod +x /usr/lib/systemd/system/trojan.service
 	systemctl start trojan.service
 	systemctl enable trojan.service
-    green "server password is" $trojan_passwd
-    green "server config is located at /usr/src/trojan/server.conf"
 	green "======================================================================"
-	green "Torjan has been successfully installed. Please use the link below to download the *fully configured* trojan client"
+	green "Torjan has been successfully installed."
+    green "Server config is located at /usr/src/trojan/server.conf"
+    green "The client password is $trojan_passwd if you want to use mobile clients (IOS or Android)"
+    green "Please use the link below to download the trojan client for desktops (windows, linux, mac)"
 	green "1、Copy the link below and open it in a browser and download the client"
 	blue "http://${your_domain}/$trojan_path/trojan-client.zip"
-	green "2、将下载的压缩包解压，打开文件夹，打开start.bat即打开并运行Trojan客户端"
-	green "3、打开stop.bat即关闭Trojan客户端"
-	green "4、Trojan客户端需要搭配浏览器插件使用，例如switchyomega等"
+    green "2. Unzip the clients and enter the folder with the name of your OS (windows, linux, mac)"
+    green "3. Select either using the gui or cli for connection"
+    green "4. If gui is selected, open Connection -> Add -> "
+    green "   Paste trojan://$trojan_passwd@${your_domain}:443#gfw-trojan ->"
+    green "   **IMPORTANT** disable `Verify certificate` and `Verify Hostname`"
+    green "   Click ok and then you are good to connect."
+    green "   Notice you can click on the icons of system tray to select "
+    green "   Global Mode, PAC Mode, or Global Mode"
 	green "======================================================================"
 	else
         red "================================"
