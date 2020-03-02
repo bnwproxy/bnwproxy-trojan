@@ -79,9 +79,9 @@ if [ $real_addr == $local_addr ] ; then
 	# download trojan client
 	wget https://github.com/bnwproxy/bnwproxy-trojan/raw/master/dist/trojan-client.zip
 	unzip trojan-client.zip
-	cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/linux/fullchain.cer
-    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/mac/fullchain.cer
-    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/windows/fullchain.cer
+	cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/linux/cli/fullchain.cer
+    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/mac/cli/fullchain.cer
+    cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-client/windows/cli/fullchain.cer
     if [[ ! -v trojan_passwd ]]; then
         trojan_passwd=$(cat /dev/urandom | head -1 | md5sum | head -c 8)
     fi
@@ -118,9 +118,9 @@ if [ $real_addr == $local_addr ] ; then
     }
 }
 EOF
-    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/linux/config.json
-    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/mac/config.json
-    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/windows/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/linux/cli/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/mac/cli/config.json
+    cp /usr/src/trojan-client/config.json /usr/src/trojan-client/windows/cli/config.json
     rm -rf /usr/src/trojan-client/config.json
 	rm -rf /usr/src/trojan/server.conf
 	cat > /usr/src/trojan/server.conf <<-EOF
