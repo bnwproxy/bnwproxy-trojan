@@ -7,10 +7,13 @@
 You could use a docker container to run the script:
 
 ```bash
-mkdir ~/trojan
-docker run -d -t --name centos -v ~/trojan:/usr/src/trojan/ --privileged  -p 1080:1080 -p 3306:3306 -p 443:443 -p 80:80 centos/systemd
+sudo yum -y install docker
+sudo systemctl start docker
 
-docker exec -it centos bash 
+mkdir ~/trojan
+sudo docker run -d -t --name centos -v ~/trojan:/usr/src/trojan/ --privileged  -p 1080:1080 -p 3306:3306 -p 443:443 -p 80:80 centos/systemd
+
+sudo docker exec -it centos bash 
 yum install -y crontabs
 yum install -y socat
 yum install -y nano
